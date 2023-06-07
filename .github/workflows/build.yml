@@ -1,19 +1,23 @@
 name: Build
-
-on: push
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
-
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Check codestyle
-        run: git ls-files *.{c,h} | xargs clang-format -i --verbose && git diff --exit-code
-
-      - name: Build application
-        run: make
-
-      - name: Build test
-        run: make test
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Run tests
+      run: python -m unittest discover -s test -p '*_test.py'
