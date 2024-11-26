@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/sound"/>
+    <qresource prefix="/ыщгтв"/>
+    <qresource prefix="/">
+        <file>sound/oan1.wav</file>
+        <file>sound/amezing.wav</file>
+    </qresource>
+</RCC>
